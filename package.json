@@ -1,0 +1,27 @@
+{
+  "name": "TDD",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "e2e": "cypress open"
+  },
+  "dependencies": {
+    "antd": "^3.26.0",
+    "babel-plugin-import": "^1.13.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "cypress": "^3.7.0",
+    "less": "^3.10.3",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-less-js-enabled": "^1.0.2"
+  }
+}
