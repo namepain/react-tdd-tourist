@@ -1,8 +1,6 @@
 import React from 'react';
 import { Spin } from 'antd'
 
-import './common/global.less'
-
 import Pages from './pages'
 
 const App = () => {

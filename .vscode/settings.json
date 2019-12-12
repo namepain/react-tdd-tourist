@@ -1,0 +1,7 @@
+{
+	"editor.insertSpaces": false,
+	"editor.renderControlCharacters": true,
+	"vetur.format.options.tabSize": 4,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true
+}

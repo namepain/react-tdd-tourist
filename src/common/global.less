@@ -11,3 +11,27 @@
   top: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
+
+.flex__lr {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-radius: 10px;
+  
+  > div {
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
+
+  > pre:first-child {
+    flex: 1 1 65%;
+    margin-right: 20px;
+    margin-bottom: 0;
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
+
+  > div:nth-child(2) {
+    flex: 1 1 35%;
+  }
+}
