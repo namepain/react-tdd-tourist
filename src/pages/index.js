@@ -1,14 +1,45 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+// import Dashboard from './Dashboard'
 
-const ROUTES = [
+export const ROUTES = [
   {
     path: '/login',
     comp: React.lazy(() => import('./Login'))
   },
   {
     path: '/dashboard',
-    comp: React.lazy(() => import('./Dashboard'))
+    comp: React.lazy(() => import('./Dashboard')),
+    child: [
+      {
+        path: '/querying',
+        comp: React.lazy(() => import('./Querying'))
+      },
+      {
+        path: '/traveral',
+        comp: React.lazy(() => import('./Traveral'))
+      },
+      {
+        path: '/actions',
+        comp: React.lazy(() => import('./Actions'))
+      },
+      {
+        path: '/command',
+        comp: React.lazy(() => import('./Commands'))
+      },
+      {
+        path: '/assertion',
+        comp: React.lazy(() => import('./Assertion'))
+      },
+      {
+        path: '/storage',
+        comp: React.lazy(() => import('./Storage'))
+      },
+      {
+        path: '/networks',
+        comp: React.lazy(() => import('./Networks'))
+      },
+    ]
   }
 ]
 
@@ -17,12 +48,12 @@ export default function Pages() {
     <BrowserRouter >
       <Switch>
         {
-          ROUTES.map(item => 
+          ROUTES.map(({ path, exact, comp: Comp, child: ChildComp }) => 
             <Route
-              key={item.path}
-              path={item.path}
-              exact={item.exact}
-              component={item.comp}
+              key={path}
+              path={path}
+              exact={!ChildComp && exact}
+              render={props => <Comp {...props} ChildComp={ChildComp && ChildComp.map(v => ({ ...v, path: path + v.path }))} />}
             />)
         }
         <Redirect to="login" />

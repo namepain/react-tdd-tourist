@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import { Layout, Menu, Breadcrumb, Icon, notification } from 'antd';
-import { useHistory } from 'react-router-dom'
+import { Redirect, Switch, Route } from 'react-router-dom'
+import { Layout, Menu, Breadcrumb, Icon, notification, Spin } from 'antd';
 
 import './index.css'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-export default function Dashboard() {
-  const history = useHistory()
+export default function Dashboard({ history, ChildComp }) {
 
   useEffect(() => {
     if (!localStorage.getItem('userInfo')) {
@@ -19,11 +18,13 @@ export default function Dashboard() {
     }
   }, [])
 
+  const menuClick = ({ key }) => history.push(ChildComp[key].path)
+
   return (
     <Layout className="Dashboard">
       <Header className="header">
         <div className="logo" />
-        <Menu
+        {/* <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={['2']}
@@ -32,58 +33,36 @@ export default function Dashboard() {
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
           <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
+        </Menu> */}
       </Header>
       <Layout>
-        <Sider width={200} style={{ background: '#fff' }}>
+        <Sider width={200} style={{ background: '#fff', overflow: 'hidden auto' }}>
           <Menu
             mode="inline"
-            defaultSelectedKeys={['1']}
+            defaultSelectedKeys={['0']}
             defaultOpenKeys={['sub1']}
             style={{ height: '100%', borderRight: 0 }}
+            onClick={menuClick}
           >
             <SubMenu
               key="sub1"
+              data-cy="basicOperation"
               title={
                 <span>
                   <Icon type="user" />
-                  subnav 1
+                  DOM查询
                 </span>
               }
             >
-              <Menu.Item key="1">option1</Menu.Item>
-              <Menu.Item key="2">option2</Menu.Item>
-              <Menu.Item key="3">option3</Menu.Item>
-              <Menu.Item key="4">option4</Menu.Item>
+              <Menu.Item key="0">常用查询</Menu.Item>
+              <Menu.Item key="1">遍 历</Menu.Item>
             </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <Icon type="laptop" />
-                  subnav 2
-                </span>
-              }
-            >
-              <Menu.Item key="5">option5</Menu.Item>
-              <Menu.Item key="6">option6</Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub3"
-              title={
-                <span>
-                  <Icon type="notification" />
-                  subnav 3
-                </span>
-              }
-            >
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
-            </SubMenu>
+
+            <Menu.Item key="2">常用动作</Menu.Item>
+            <Menu.Item key="3">全局命令</Menu.Item>
+            <Menu.Item key="4">断 言</Menu.Item>
+            <Menu.Item key="5">存 储</Menu.Item>
+            <Menu.Item key="6">网 络</Menu.Item>
           </Menu>
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
@@ -94,13 +73,27 @@ export default function Dashboard() {
           </Breadcrumb>
           <Content
             style={{
+              position: 'relative',
+              flex: '1 0 auto',
               background: '#fff',
               padding: 24,
               margin: 0,
               minHeight: 280,
             }}
           >
-            Content
+            <React.Suspense fallback={ <Spin size="large" className="absolute__center" /> }>
+              <Switch>
+                {
+                  ChildComp.map(({ path, exact, comp: Comp, child: ChildComp }) => <Route
+                    key={path}
+                    path={path}
+                    exact={exact}
+                    render={props => <Comp {...props} ChildComp={ChildComp} />}
+                  />)
+                }
+                <Redirect to="/dashboard/querying" />
+              </Switch>
+            </React.Suspense>
           </Content>
         </Layout>
       </Layout>
