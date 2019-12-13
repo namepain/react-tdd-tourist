@@ -69,6 +69,16 @@ const CODES = [
 				Button 有一个class third
 			</div>
 		</div>
+	],
+	[
+		'Best Practice',
+		[
+			`// 与业务解耦
+			cy.get('[data-cy="bestBtn"]').click()`
+		],
+		(
+			<Button data-cy="bestBtn" onClick={e => e.target.style.display= !e.target.style.display ? 'none' : ''}>点我，88了</Button>
+		)
 	]
 ]
 

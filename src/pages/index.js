@@ -16,8 +16,8 @@ export const ROUTES = [
         comp: React.lazy(() => import('./Querying'))
       },
       {
-        path: '/traveral',
-        comp: React.lazy(() => import('./Traveral'))
+        path: '/traversal',
+        comp: React.lazy(() => import('./Traversal'))
       },
       {
         path: '/actions',

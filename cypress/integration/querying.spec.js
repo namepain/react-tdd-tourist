@@ -46,4 +46,14 @@ describe('querying page', () => {
 			.contains('.btnWrapper', 'bananas')
 			.should('have.class', 'btnWrapper')
 	})
+
+	it('should not be visible after click', () => {
+		cy.get('[data-cy="bestBtn')
+			.click()
+			.should('not.be', 'visible')
+
+		cy.get('[data-cy="bestBtn')
+			.click({ force: true })
+			.should('be', 'visible')
+	})
 })
