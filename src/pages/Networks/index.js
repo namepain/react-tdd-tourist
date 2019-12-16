@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Axios from 'axios'
 import { Typography, Checkbox, Button, Form, Input, Icon } from 'antd'
 import TheBlock from '../../components/TheBlock'
 
@@ -62,15 +63,32 @@ const CODES = [
 				
 			})
 		`,
-		(
-			<Button
-				data-cy="fly"
-				type="primary"
-				onClick={() => fetch('http://localhost:1234/api/fly', {
-					method: 'post'
-				}).then(res => res.json()).then(console.log)}
-			>让子弹飞一会儿</Button>
-		)
+		React.createElement(function () {
+			const [state, setState] = useState('没打中 ？？')
+			return (
+				<Button
+					data-cy="fly"
+					type="primary"
+					onClick={() => Axios('http://localhost:1234/api/fly', {
+						method: 'post'
+					}).then(res => setState(res.data.data))}
+				>{ state }</Button>
+			)
+		})
+	],
+	[
+		`request`,
+		`
+		let message = '让子弹飞一会儿'
+
+		// 访问express服务
+		cy.request('POST', 'http://localhost:3000/api')
+			.its('body') // yields the first element of the returned list
+			.then((data) => {
+				console.log(data)
+				expect(data).property('data').to.eq(message)
+			})
+		`
 	]
 ]
 

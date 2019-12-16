@@ -47,22 +47,27 @@ describe('network', () => {
 		// TODO
 		cy.route({
 			method: 'POST',
-			url: '/api/fly',
+			url: 'api/fly',
 			status: 200,
 			response: { data: message },
-			delay: 500
+			delay: 1000
 		}).as('putComment')
 
 		cy.get('[data-cy="fly"]')
 			.click()
+		cy.wait('@putComment')
 
-		// cy.request('PUT', 'api/fly')
-		// 	.its('body') // yields the first element of the returned list
-		// 	.then((data) => {
-		// 		console.log(data)
-		// 		expect(data).property('data').to.eq(message)
-				
-		// 	})
+	})
 
+	it('request', () => {
+		let message = '让子弹飞一会儿'
+
+
+		cy.request('POST', 'http://localhost:3000/api')
+			.its('body') // yields the first element of the returned list
+			.then((data) => {
+				console.log(data)
+				expect(data).property('data').to.eq(message)
+			})
 	})
 })
