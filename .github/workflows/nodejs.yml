@@ -20,10 +20,12 @@ jobs:
           build: npm run build
           start: node server
           wait-on: http://localhost:1234
-          record: false
-          parallel: true
-          group: 'Actions example'
-          ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
+
+          # 以下几个参数可以把 test 记录到 cypress dashboard
+          # record: true
+          # parallel: true
+          # group: 'Actions example'
+          # ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
