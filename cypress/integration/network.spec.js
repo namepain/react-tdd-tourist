@@ -4,7 +4,7 @@ describe('network', () => {
 
 	beforeEach(() => {
 		localStorage.setItem('userInfo', {})
-		cy.visit('/dashboard/networks')
+		cy.visit('#/dashboard/networks')
 	})
 
 	it('server', () => {

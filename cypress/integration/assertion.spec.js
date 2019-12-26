@@ -3,7 +3,7 @@
 describe('Assertions', () => {
 	beforeEach(() => {
 		localStorage.setItem('userInfo', JSON.stringify({}))
-		cy.visit('/dashboard/assertion')
+		cy.visit('#/dashboard/assertion')
 	})
 
 	it('should', () => {

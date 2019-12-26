@@ -3,7 +3,7 @@
 describe('querying page', () => {
 	beforeEach(() => {
 		localStorage.setItem('userInfo', {})
-		cy.visit('/dashboard/querying')
+		cy.visit('#/dashboard/querying')
 	})
 
 	it('should get button', () => {

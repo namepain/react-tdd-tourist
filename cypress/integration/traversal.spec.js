@@ -3,7 +3,7 @@
 describe('traversal page', () => {
 	beforeEach(() => {
 		localStorage.setItem('userInfo', {})
-		cy.visit('/dashboard/traversal')
+		cy.visit('#/dashboard/traversal')
 	})
 
 	it('should get button', () => {

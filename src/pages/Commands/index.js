@@ -28,7 +28,7 @@ const CODES = [
   ],
   [
     `cy.hash()`,
-    `cy.hash().should('be.empty')`
+    `cy.hash().should('not.be.empty')`
   ],
   [
     `cy.location()`,

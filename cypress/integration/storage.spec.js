@@ -3,7 +3,7 @@
 describe('Storage', () => {
 	beforeEach(() => {
 		localStorage.setItem('userInfo', JSON.stringify({}))
-		cy.visit('/dashboard/storage')
+		cy.visit('#/dashboard/storage')
 	})
 
 	it('localstorage', () => {

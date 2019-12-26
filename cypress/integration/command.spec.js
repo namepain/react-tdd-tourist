@@ -3,7 +3,7 @@
 describe('global api and command', () => {
 	beforeEach(() => {
 		localStorage.setItem('userInfo', JSON.stringify({}))
-		cy.visit('/dashboard/command')
+		cy.visit('#/dashboard/command')
 	})
 
 	it('should set viewport', () => {
@@ -32,19 +32,19 @@ describe('global api and command', () => {
 	})
 
 	it('should get the hash', () => {
-		cy.hash().should('be.empty')
+		cy.hash().should('not.be.empty')
 	})
 
 	it('should get the location', () => {
 		cy.location().should(location => {
-			expect(location.hash).to.be.empty
+			expect(location.hash).not.to.be.empty
 			expect(location.href).to.eq(
-				'http://localhost:1234/dashboard/command'
+				'http://localhost:1234/#/dashboard/command'
 			)
 			expect(location.host).to.eq('localhost:1234')
 			expect(location.hostname).to.eq('localhost')
 			expect(location.origin).to.eq('http://localhost:1234')
-			expect(location.pathname).to.eq('/dashboard/command')
+			expect(location.pathname).to.eq('/')
 			expect(location.port).to.eq('1234')
 			expect(location.protocol).to.eq('http:')
 			expect(location.search).to.be.empty
@@ -52,7 +52,7 @@ describe('global api and command', () => {
 	})
 
 	it('should get the url', () => {
-		cy.url().should('eq', 'http://localhost:1234/dashboard/command')
+		cy.url().should('eq', 'http://localhost:1234/#/dashboard/command')
 	});
 
 })

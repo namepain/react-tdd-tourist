@@ -3,7 +3,7 @@
 describe('actions page', () => {
 	beforeEach(() => {
 		localStorage.setItem('userInfo', {})
-		cy.visit('/dashboard/actions')
+		cy.visit('#/dashboard/actions')
 	})
 
 	it('should type some text', () => {
