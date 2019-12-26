@@ -7,7 +7,7 @@
     "start": "parcel index.html",
     "build": "parcel build index.html",
     "cy:open": "cypress open",
-    "cy:run": "cypress run --record --parallel",
+    "cy:run": "cypress run --record --key e7c6caf8-66b1-4184-be9b-f3ab61d33e81 --parallel",
     "dev": "start-server-and-test start http-get://localhost:1234 cy:open",
     "test": "start-server-and-test start http-get://localhost:1234 cy:run"
   },
