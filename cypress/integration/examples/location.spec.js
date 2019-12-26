@@ -7,7 +7,7 @@ context('Location', () => {
 
   it('cy.hash() - get the current URL hash', () => {
     // https://on.cypress.io/hash
-		cy.hash().should('not.be.empty')
+		cy.hash().should('be.empty')
   })
 
   it('cy.location() - get window.location', () => {
