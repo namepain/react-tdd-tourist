@@ -3,7 +3,7 @@ name: Node CI
 on: [push]
 
 jobs:
-  build:
+  cypress-run:
 
     runs-on: ubuntu-latest
 
@@ -13,12 +13,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Run server
-        run: |
-          npm run start & npx wait-on http://localhost:1234
-          npm -v
       - uses: cypress-io/github-action@v1
         with:
+          build: npm run build
+          start: node server
+          wait-on: http://localhost:3000
           record: true
           parallel: true
           group: 'Actions example'
