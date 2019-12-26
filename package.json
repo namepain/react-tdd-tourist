@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --public-url=./",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "start-server-and-test start http-get://localhost:1234 cy:open"

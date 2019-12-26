@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom'
 // import Dashboard from './Dashboard'
 
 export const ROUTES = [
@@ -45,7 +45,7 @@ export const ROUTES = [
 
 export default function Pages() {
   return (
-    <BrowserRouter >
+    <HashRouter >
       <Switch>
         {
           ROUTES.map(({ path, exact, comp: Comp, child: ChildComp }) => 
@@ -58,6 +58,6 @@ export default function Pages() {
         }
         <Redirect to="login" />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
