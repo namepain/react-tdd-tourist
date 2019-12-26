@@ -14,4 +14,4 @@ app.use('*', function(req, res) {
   res.sendFile(path.resolve(__dirname, './dist/index.html'))
 })
 
-app.listen(3000, () => console.log('Listening on port 3000!'))
+app.listen(1234, () => console.log('Listening on port 1234!'))

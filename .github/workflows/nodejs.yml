@@ -17,7 +17,7 @@ jobs:
         with:
           build: npm run build
           start: node server
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:1234
           record: true
           parallel: true
           group: 'Actions example'
