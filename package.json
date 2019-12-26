@@ -8,9 +8,7 @@
     "build": "parcel build index.html",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "dev": "start-server-and-test start http-get://localhost:1234 cy:open",
-    "test": "start-server-and-test start http-get://localhost:1234 cy:run",
-    "beforetest": "start-server-and-test start http-get://localhost:1234"
+    "dev": "start-server-and-test start http-get://localhost:1234 cy:open"
   },
   "dependencies": {
     "antd": "^3.26.0",

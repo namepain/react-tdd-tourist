@@ -15,7 +15,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run server
         run: |
-          npm run beforetest
+          npm run start & npx wait-on http://localhost:1234
+          npm -v
       - uses: cypress-io/github-action@v1
         with:
           record: true
