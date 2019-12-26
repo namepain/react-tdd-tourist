@@ -39,3 +39,8 @@ cypress
     ├── commands.js
     └── index.js
 ```
+
+## 一些注意点
+
+- 免费账户好像每月只有 500 个 test recordings 额度
+![cypress_test_limit](./img/cypress_test_limit.png)
