@@ -59,15 +59,15 @@ describe('network', () => {
 
 	})
 
-	// it('request', () => {
-	// 	let message = '让子弹飞一会儿'
+	it.skip('request', () => {
+		let message = '让子弹飞一会儿'
 
 
-	// 	cy.request('POST', 'http://localhost:3000/api')
-	// 		.its('body') // yields the first element of the returned list
-	// 		.then((data) => {
-	// 			console.log(data)
-	// 			expect(data).property('data').to.eq(message)
-	// 		})
-	// })
+		cy.request('POST', 'http://localhost:3000/api')
+			.its('body') // yields the first element of the returned list
+			.then((data) => {
+				console.log(data)
+				expect(data).property('data').to.eq(message)
+			})
+	})
 })
