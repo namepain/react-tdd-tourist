@@ -129,7 +129,7 @@ describe('Unit test our math functions', () => {
 
 ## 生成快照和视频
 
-## ci
+## CI
 这里以 `GitHub Action` 为例配置一个项目的 CI 流程。在项目下增加 `.github/workflows/main.yml` 文件, 并贴下如下内容。
 
 ```yml
@@ -177,8 +177,47 @@ cypress 官方提供的 action `cypress-io/github-action@v1` 会自动运行 `np
 再次 `push` 代码, 重新运行成功后便能看到项目多了一个 `gh-pages` 分支, 项目已经被静态部署到 github 了
 
 
-结合 cypress dashboard 记录 CI 的结果，待续。。。
+当然，CI 流程还能结合 cypress 官方提供的 dashboard 服务，记录执行的日志、截图、视频以及获得并行运行测试等高级功能。
 
+来到 cypress 命令窗的 Runs 界面，点击 `set up project` 按钮, 选择 Me -> Public -> Set up project.
+
+<img src="./img/setupruns.png" height="300"/>
+
+<br/>
+
+<img src="./img/setupproject.jpg" height="300"/>
+
+少许片刻，设置成功后会获得 `projectId` 和 `record key`
+
+<img src="./img/setupsuc.jpg" height="300">
+
+按照提示，你已经可以在命令行或者 `CI` 环境运行 `npx cypress run --record --key xxxx-xx-xx-xxxx` 了。
+
+在命令行运行完成后，你已经可以到 [cypress dashboard](https://dashboard.cypress.io/) 看到项目运行的记录了
+
+<img src="./img/latestrun.jpg" height="300"/>
+
+结合 `CI` 流程，须在 `yml` 文件中 `cypress-io/github-action@v1` 下补充一段代码
+
+```yml
+      # cypress 官方提供
+      - uses: cypress-io/github-action@v1
+        with:
+          build: npm run build
+          start: node server
+          wait-on: http://localhost:1234
+
+          # 以下几个参数可以把 test 记录到 cypress dashboard
+          record: true # 开启记录
+          parallel: true # 并行运行测试更快
+          group: 'Actions example' # 组名称 随意
+          ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}' # 这几个变量不用管
+        env:
+          # 传递 record key 到 CI 环境中
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+```
+
+这里需要将生成的 `record key` 填充到 `github` 项目主页 `Settings` 面板下 `Secrets` 菜单页作为 `CYPRESS_RECORD_KEY` 环境变量。 配置完成，`push` 代码，你将看到 `github action` 开始运行，运行成功后 [`dashboard`](https://dashboard.cypress.io/) 多了一次运行的记录。
 
 
 [详情见文档](https://docs.cypress.io/guides/dashboard/github-integration.html#Install-the-Cypress-GitHub-app)
@@ -189,5 +228,6 @@ cypress 官方提供的 action `cypress-io/github-action@v1` 会自动运行 `np
 
 ## 一些注意点
 
-- 免费账户好像每月只有 500 个 test recordings 额度
+- 免费账户好像每月只有 500 个 `test recordings` 额度
+
 <img src="./img/cypress_test_limit.png" height="300"/>
